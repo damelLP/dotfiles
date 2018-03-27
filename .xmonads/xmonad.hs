@@ -95,9 +95,8 @@ myManageHook = composeAll
 myLayoutHook 
   = smartBorders 
   $ avoidStruts 
-  $ mkToggle (NOBORDERS ?? FULL ?? EOT)
-  $ Grid ||| tiled ||| noBorders (fullscreenFull Full) ||| Mirror tiled
-  where tiled = Tall 1 (1/2) (3/100)
+  $ mkToggle (FULL ?? EOT) 
+  $ layoutHook def 
 
 -- Events
 myEventHook = composeAll
