@@ -86,6 +86,7 @@ myKeys = [
         -- launch apps
           ((modm .|. mod1Mask, xK_l), spawn "xlock -mode matrix")
 	, ((modm, xK_g), spawn "google-chrome-stable")
+	, ((modm .|. shiftMask, xK_g), spawn "google-chrome-stable --user-data-dir=/tmp")
 	, ((modm, xK_p), spawn "yegonesh")
 	, ((modm, xK_Return), spawn myTerminal)
 
