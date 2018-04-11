@@ -89,6 +89,7 @@ myKeys = [
 	, ((modm .|. shiftMask, xK_g), spawn "google-chrome-stable --user-data-dir=/tmp")
 	, ((modm, xK_p), spawn "yegonesh")
 	, ((modm, xK_Return), spawn myTerminal)
+	, ((modm, xK_F3), spawn "pcmanfm")
 
         -- interact with currentWindow
 	, ((modm, xK_f), sendMessage $ Toggle FULL)
@@ -132,7 +133,7 @@ myLayoutHook
   $ avoidStruts 
   $ minimize 
   $ mkToggle (FULL ?? EOT) 
-  $ Grid (16/10)
+  $ layoutHook def
 
 -- Event Hook
 myEventHook = composeAll
