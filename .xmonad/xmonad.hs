@@ -93,8 +93,8 @@ myKeys = [
 
         -- interact with currentWindow
 	, ((modm, xK_f), sendMessage $ Toggle FULL)
-	, ((modm, xK_m), sendMessage RestoreNextMinimizedWin)
-	, ((modm .|. shiftMask, xK_m), withFocused minimizeWindow)
+        {-, ((modm, xK_m), sendMessage RestoreNextMinimizedWin)-}
+        {-, ((modm .|. shiftMask, xK_m), withFocused minimizeWindow)-}
 	, ((modm .|. shiftMask, xK_comma), sendMessage Shrink)
 	, ((modm .|. shiftMask, xK_period), sendMessage Expand)
 
@@ -142,6 +142,7 @@ myEventHook = composeAll
   ]
 
 -- , NS "vpn" "airvpn" (title =? "vpn") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
-scratchpads = [ NS "htop" "urxvt -e htop" (title =? "htop") defaultFloating
-	]
+scratchpads = [ 
+      NS "htop" "urxvt -e htop" (title =? "htop") defaultFloating
+    ]
 
