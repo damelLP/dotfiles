@@ -1,3 +1,12 @@
+{-import XMonad
+
+main = xmonaddef
+  {terminal = "urxvt"
+  , modMask = mod4Mask
+  , borderWidth = 3
+  }
+-}
+
 -- XMonad core
 import XMonad
 import qualified XMonad.StackSet as W
@@ -18,6 +27,7 @@ import XMonad.Util.SpawnOnce
 
 -- Actions
 import XMonad.Actions.Navigation2D
+import XMonad.Actions.Minimize
 
 -- Layout
 import XMonad.Layout.Named
@@ -27,6 +37,7 @@ import XMonad.Layout.Fullscreen
 import XMonad.Layout.Gaps
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.BoringWindows 
 import XMonad.Layout.Minimize 
 
 -- System
@@ -57,13 +68,13 @@ modm = mod4Mask
 
 -- define window navigation
 myNavs config = withNavigation2DConfig def
-  $ additionalNav2DKeys (xK_k, xK_h, xK_j, xK_l) 
+   $ additionalNav2DKeys (xK_k, xK_h, xK_j, xK_l) 
                         myNavMask 
                         False
-  $ additionalNav2DKeys (xK_Up, xK_Left, xK_Down, xK_Right) 
+   $ additionalNav2DKeys (xK_Up, xK_Left, xK_Down, xK_Right) 
                         myNavMask 
                         False
-  $ config
+   $ config
 
 -- Mask for activating the nav keys
 myNavMask = [(modm, windowGo), 
@@ -85,27 +96,24 @@ myPP = xmobarPP { ppVisible = xmobarColor "#404040" ""
 myKeys = [ 
         -- launch apps
           ((modm .|. mod1Mask, xK_l), spawn "xlock -mode matrix")
-	, ((modm, xK_g), spawn "google-chrome-stable")
-	, ((modm .|. shiftMask, xK_g), spawn "google-chrome-stable --user-data-dir=/tmp")
-	, ((modm, xK_p), spawn "yegonesh")
-	, ((modm, xK_Return), spawn myTerminal)
-	, ((modm, xK_F3), spawn "pcmanfm")
+        , ((modm, xK_p), spawn "yegonesh")
+        , ((modm, xK_Return), spawn myTerminal)
 
         -- interact with currentWindow
-	, ((modm, xK_f), sendMessage $ Toggle FULL)
-        {-, ((modm, xK_m), sendMessage RestoreNextMinimizedWin)-}
-        {-, ((modm .|. shiftMask, xK_m), withFocused minimizeWindow)-}
-	, ((modm .|. shiftMask, xK_comma), sendMessage Shrink)
-	, ((modm .|. shiftMask, xK_period), sendMessage Expand)
+        , ((modm, xK_f), sendMessage $ Toggle FULL)
+        , ((modm, xK_m), withFocused minimizeWindow)
+        , ((modm .|. shiftMask, xK_m), withLastMinimized maximizeWindowAndFocus)
+        , ((modm .|. shiftMask, xK_comma), sendMessage Shrink)
+        , ((modm .|. shiftMask, xK_period), sendMessage Expand)
 
         -- control xmonad
-	, ((modm .|. shiftMask, xK_x), io (exitWith ExitSuccess))
-	, ((modm .|. shiftMask, xK_q), kill)
-	, ((modm .|. shiftMask, xK_u), spawn "shutdown now" )
+        , ((modm .|. shiftMask, xK_x), io (exitWith ExitSuccess))
+        , ((modm .|. shiftMask, xK_q), kill)
+        , ((modm .|. shiftMask, xK_u), spawn "shutdown now" )
 
         -- scratchpads
-	, ((modm .|. controlMask, xK_t), namedScratchpadAction scratchpads "htop")
-	, ((modm , xK_v), namedScratchpadAction scratchpads "vpn")
+        , ((modm .|. controlMask, xK_t), namedScratchpadAction scratchpads "htop")
+        , ((modm , xK_v), namedScratchpadAction scratchpads "vpn")
         ]
 
 -- my 
@@ -129,11 +137,12 @@ myManageHook = composeAll
 
 -- Layout Hook
 myLayoutHook 
-  = smartBorders 
-  $ avoidStruts 
-  $ minimize 
-  $ mkToggle (FULL ?? EOT) 
-  $ layoutHook def
+   = boringWindows
+   $ smartBorders 
+   $ avoidStruts 
+   $ minimize 
+   $ mkToggle (FULL ?? EOT) 
+   $ layoutHook def
 
 -- Event Hook
 myEventHook = composeAll
@@ -145,4 +154,3 @@ myEventHook = composeAll
 scratchpads = [ 
       NS "htop" "urxvt -e htop" (title =? "htop") defaultFloating
     ]
-
