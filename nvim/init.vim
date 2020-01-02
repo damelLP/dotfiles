@@ -10,6 +10,7 @@ set autoindent
 set shiftwidth=4
 set ruler
 set backspace=indent,eol,start
+set number
 augroup numbertoggle
 	autocmd!
 	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
