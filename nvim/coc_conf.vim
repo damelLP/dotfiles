@@ -5,6 +5,8 @@ set hidden
 set nobackup
 set nowritebackup
 
+set signcolumn=yes
+
 " Better display for messages
 set cmdheight=1
 

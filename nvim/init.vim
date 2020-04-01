@@ -20,6 +20,12 @@ augroup end
 set wildmode=longest,list,full
 set wildmenu
 set completeopt+=longest
+set nohlsearch
 
 set splitbelow
 set splitright
+
+map <C-P> :FZF<CR>
+
+map <leader>bp :bp<CR>
+map <leader>bn :bn<CR>
