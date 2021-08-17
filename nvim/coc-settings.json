@@ -1,14 +1,16 @@
 {
+  "java.home": "/usr/lib/jvm/java-11-openjdk",
+  "java.project.referencedLibs":[ "/usr/local/lift/lib/*.jar"],
   "languageserver": {
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
       "rootPatterns": [".ccls-root", "compile_commands.json"],
       "initializationOptions": {
-         "cache": {
-           "directory": ".ccls-cache"
-         }
-       }
+        "cache": {
+          "directory": ".ccls-cache"
+        }
+      }
     }
   }
 }

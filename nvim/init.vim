@@ -1,5 +1,6 @@
 set encoding=utf-8
 set nocompatible
+set nrformats+=alpha
 
 source ~/.config/nvim/plugins.vim
 
