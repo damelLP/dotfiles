@@ -1,0 +1,32 @@
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff
+[merge "jupyternotebook"]
+	driver = git-nbmergedriver merge %O %A %B %L %P
+	name = jupyter notebook merge driver
+[difftool "nbdime"]
+	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[difftool]
+	prompt = false
+[mergetool "nbdime"]
+	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	prompt = false
+[core]
+	excludesfile = /home/damel/.gitignore_global
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+
+[user]
+    name = Default Name
+    email = default@email.com
+
+# Automatically include specific settings if the repo is inside these folders
+[includeIf "gitdir:~/code/"]
+    path = ~/.gitconfig-private
+
+[includeIf "gitdir:~/git/"]
+    path = ~/.gitconfig-public

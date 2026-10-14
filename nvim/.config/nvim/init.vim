@@ -18,6 +18,19 @@ augroup numbertoggle
 	autocmd BufLeave,FocusGained,InsertEnter * set norelativenumber
 augroup end
 
+function! ToggleCopyMode()
+    " check if mouse is enabled
+    if &mouse == 'a'
+        set mouse= norelativenumber nonumber
+    else
+        set mouse=a relativenumber number
+    endif
+    execute "IndentLinesToggle"
+endfunc
+
+command! ToggleCopyMode call ToggleCopyMode()
+map <leader>e :ToggleCopyMode<CR>
+
 set wildmode=longest,list,full
 set wildmenu
 set completeopt+=longest
@@ -25,8 +38,6 @@ set nohlsearch
 
 set splitbelow
 set splitright
-
-map <C-P> :FZF<CR>
 
 map <leader>bp :bp<CR>
 map <leader>bn :bn<CR>

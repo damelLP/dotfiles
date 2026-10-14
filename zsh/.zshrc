@@ -1,18 +1,17 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export TERM="xterm-256color"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/damel/.oh-my-zsh"
 
-powerline-daemon -q
-. /usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+#powerline-daemon -q
+#. /usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=
 
 # Set list of themes to pick from when loading at random
@@ -70,7 +69,6 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 plugins=(
   git
   tmux
-  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -107,17 +105,48 @@ alias fixit='sudo rm -f /var/lib/pacman/db.lck'
 alias ls='ls --color=auto'
 alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias vi='vim'
+alias vi='nvim'
+alias vim='nvim'
+alias kc='kubectl'
+alias pr='poetry run'
+alias stop_vpn='sudo systemctl stop openvpn-client@AirVPN_Europe_TCP-443.service'
+alias start_vpn='sudo systemctl start openvpn-client@AirVPN_Europe_TCP-443.service'
 
 export BROWSER=firefox
-export EDITOR=vim
+export EDITOR=nvim
+export PATH=~/.local/bin:$PATH:~/.cargo/bin/:$(go env GOPATH)/bin:/home/damel/.local/share/solana/install/active_release/bin
+export QMK_HOME='~/qmk_firmware'
+export CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
+export WORKON_HOME=~/.virtualenvs
+[ -f ~/.zsh_secrets ] && source ~/.zsh_secrets  # secrets live outside the dotfiles repo
+export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python"
+source /usr/bin/virtualenvwrapper.sh
 
-source /usr/share/doc/pkgfile/command-not-found.zsh
-source /home/damel/.oh-my-zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-if [[ -z $TMUX ]]; then
-  tmux attach -t main || tmux new -s main
-fi
+unset GREP_OPTIONS
+#if [[ -z $TMUX ]]; then
+    #tmux attach -t main || tmux new -s main
+#fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/damel/google-cloud-sdk/path.zsh.inc' ]; then . '/home/damel/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/damel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/damel/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Entire CLI shell completion
+autoload -Uz compinit && compinit && source <(entire completion zsh)
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/damel/.local/bin:$PATH"
