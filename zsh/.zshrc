@@ -114,14 +114,14 @@ alias start_vpn='sudo systemctl start openvpn-client@AirVPN_Europe_TCP-443.servi
 
 export BROWSER=firefox
 export EDITOR=nvim
-export PATH=~/.local/bin:$PATH:~/.cargo/bin/:$(go env GOPATH)/bin:/home/damel/.local/share/solana/install/active_release/bin
+export PATH=~/.local/bin:$PATH:~/.cargo/bin/
 export QMK_HOME='~/qmk_firmware'
 export CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1
 
 export WORKON_HOME=~/.virtualenvs
 [ -f ~/.zsh_secrets ] && source ~/.zsh_secrets  # secrets live outside the dotfiles repo
 export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python"
-source /usr/bin/virtualenvwrapper.sh
+[ -f /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
