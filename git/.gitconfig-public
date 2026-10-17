@@ -2,3 +2,7 @@
 	email = dlambertpowell@gmail.com
 	name = Damel Lambert-Powell
 
+[core]
+	sshCommand = ssh -i ~/.ssh/damelLP/id_ed25519 -o IdentitiesOnly=yes
+[url "git@github.com:"]
+	insteadOf = https://github.com/
