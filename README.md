@@ -11,6 +11,7 @@ package that mirrors `$HOME`; `stow <pkg>` symlinks it into place.
 | `git`    | `.gitconfig` `.gitconfig-public` `~/.config/git`             |
 | `i3`     | `~/.config/i3`                                               |
 | `kitty`  | `~/.config/kitty`                                            |
+| `alacritty` | `~/.config/alacritty`                                     |
 | `x11`    | `.xinitrc`                                                   |
 
 Legacy, not stowed by default: `xmonad` (xmonad + xmobar + Xresources), `bash`, `vim`.
@@ -18,9 +19,9 @@ Legacy, not stowed by default: `xmonad` (xmonad + xmobar + Xresources), `bash`, 
 ## New machine
 
 ```sh
-sudo pacman -S stow git zsh neovim tmux i3-wm kitty github-cli python-nbdime
+sudo pacman -S stow git zsh neovim tmux i3-wm kitty alacritty github-cli python-nbdime
 git clone git@github.com:damelLP/dotfiles.git ~/git/dotfiles
-cd ~/git/dotfiles && stow zsh nvim tmux git i3 kitty x11   # .stowrc targets ~
+cd ~/git/dotfiles && stow zsh nvim tmux git i3 kitty alacritty x11   # .stowrc targets ~
 ```
 
 Then:
