@@ -2,6 +2,11 @@
 
 vim.env.FZF_DEFAULT_COMMAND = "rg --files"
 
+-- Since fzf 0.74.4 the default inside tmux is a tmux floating pane sized against
+-- the whole tmux window, so it spills past nvim's pane. Use a Neovim float,
+-- which is sized against nvim itself.
+vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
+
 -- Shorter CursorHold delay and a fixed sign column so diagnostics and
 -- vim-signature marks don't shift the text sideways
 vim.opt.updatetime = 300
